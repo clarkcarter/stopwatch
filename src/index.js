@@ -1,53 +1,68 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class Stopwatch extends React.Component {
+export class Timer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      seconds: 57
+      secondsRemaining: 610,
+      running: false
     };
-    this.handleStartClick = this.handleStartClick.bind(this);
-    this.handleStopClick = this.handleStopClick.bind(this);
-    this.formatSeconds = this.formatSeconds.bind(this);
-    this.formatMinutes = this.formatMinutes.bind(this);
+    this.formatedSeconds = this.formatedSeconds.bind(this);
+    this.formatedMinutes = this.formatedMinutes.bind(this);
+    this.startTimer = this.startTimer.bind(this);
+    this.stopTimer = this.stopTimer.bind(this);
   }
 
-  formatSeconds() {
-    const formatedSeconds = this.state.seconds % 60;
-    return (formatedSeconds);
+  formatedSeconds() {
+    const formatedSecs = this.state.secondsRemaining % 60;
+    if (formatedSecs > 9) {
+      return formatedSecs;
+    } else {
+      return "0" + formatedSecs;
+    }
   }
 
-  formatMinutes() {
-    return Math.floor(this.state.seconds / 60);
+  formatedMinutes() {
+    const formatedMinutes = Math.floor(this.state.secondsRemaining / 60);
+    if (formatedMinutes > 9) {
+      return formatedMinutes;
+    } else {
+      return "0" + formatedMinutes;
+    }
   }
 
   startTimer() {
+    this.countdown = setInterval(() =>
     this.setState({
-      seconds: this.state.seconds + 1
+      secondsRemaining: this.state.secondsRemaining -1
+    }),1000);
+    this.setState({
+      running: true
     })
   }
 
-  handleStartClick() {
-   this.timer = setInterval(() => this.startTimer(),1000);
-  }
-
-  handleStopClick() {
-    clearInterval(this.timer);
+  stopTimer() {
+    clearInterval(this.countdown);
     this.setState({
-      seconds: 0
+      running: false
     })
   }
 
   render() {
+    const seconds = this.formatedSeconds();
+    const minutes = this.formatedMinutes();
+    const running = this.state.running;
     return (
-      <div>
-        <h1>{this.formatMinutes()}:{this.formatSeconds()}</h1>
-        <button onClick={this.handleStartClick}>start</button>
-        <button onClick={this.handleStopClick}>stop</button>
+      <div className="timer">
+        <h1>{minutes}:{seconds}</h1>
+        <button onClick={this.state.running ? this.stopTimer : this.startTimer}>{running ? 'stop' : 'start'}</button>
+        <button>reset</button>
       </div>
     )
   }
 }
 
-ReactDOM.render(<Stopwatch />, document.getElementById('root'));
+ReactDOM.render(
+  <Timer />, document.getElementById('root')
+);

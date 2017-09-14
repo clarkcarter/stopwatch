@@ -1,0 +1,4 @@
+add milliseconds to Timer
+add slider to adjust the start time
+add reset button
+add styling (possibly from semantic ui)
