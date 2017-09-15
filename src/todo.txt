@@ -1,4 +1,5 @@
 add milliseconds to Timer
+add 'Timer' title
 slider increment to nearest 10 seconds?
 add optional 'tick' sound every second (toggled on and off with checkbox)
 add optional 'alarm' sound on completion (toggled on and off with checkbox)
