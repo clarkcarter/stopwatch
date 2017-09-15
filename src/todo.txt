@@ -1,4 +1,8 @@
 add milliseconds to Timer
-add slider to adjust the start time
-add reset button
+slider increment to nearest 10 seconds?
+add optional 'tick' sound every second (toggled on and off with checkbox)
+add optional 'alarm' sound on completion (toggled on and off with checkbox)
 add styling (possibly from semantic ui)
+extract components for cleaner, reusable code
+how do lifecycle events work with this app? - why do I need them and what do they do?
+stop timer when it reaches zero.
