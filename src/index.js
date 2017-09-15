@@ -16,6 +16,7 @@ export class Timer extends React.Component {
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.tick = this.tick.bind(this);
   }
 
   formatedSeconds() {
@@ -36,15 +37,26 @@ export class Timer extends React.Component {
     }
   }
 
+  tick() {
+    if (this.state.secondsRemaining > 0) {
+      this.setState({
+        secondsRemaining: this.state.secondsRemaining -1
+      });
+    } else {
+      this.setState({
+        running: false
+      });
+      clearInterval(this.countdown);
+      document.getElementById("slider").disabled = false;
+    }
+  }
+
   startTimer() {
-    this.countdown = setInterval(() =>
-    this.setState({
-      secondsRemaining: this.state.secondsRemaining -1
-    }),1000);
     this.setState({
       running: true
     });
-    document.getElementById('slider').disabled = true;
+    this.countdown = setInterval(this.tick, 1000);
+    document.getElementById("slider").disabled = true;
   }
 
   stopTimer() {
@@ -52,13 +64,17 @@ export class Timer extends React.Component {
     this.setState({
       running: false
     });
-    document.getElementById('slider').disabled = false;
+    document.getElementById("slider").disabled = false;
   }
 
   handleChange(e) {
     this.setState({
       secondsRemaining: e.target.value
     })
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.countdown);
   }
 
   render() {
