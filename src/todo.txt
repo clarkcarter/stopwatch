@@ -1,7 +1,4 @@
-fix countdown timer so stops at 0 = https://w33ble.github.io/understanding-react/demos/countdown.html
-add milliseconds to Timer
-add 'Timer' title
-slider increment to nearest 10 seconds?
+add reset button that is only active when timer is not running
 add optional 'tick' sound every second (toggled on and off with checkbox)
 add optional 'alarm' sound on completion (toggled on and off with checkbox)
 extract components for cleaner, reusable code

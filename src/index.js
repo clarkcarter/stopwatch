@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';
 import { Segment, Button, Grid } from 'semantic-ui-react';
+import ding from './assets/ding.mp3';
 
 export class Timer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      secondsRemaining: 0,
+      secondsRemaining: 60,
       running: false
     };
     this.formatedSeconds = this.formatedSeconds.bind(this);
@@ -17,6 +18,7 @@ export class Timer extends React.Component {
     this.stopTimer = this.stopTimer.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.tick = this.tick.bind(this);
+    this.ding = new Audio(ding);
   }
 
   formatedSeconds() {
@@ -43,11 +45,12 @@ export class Timer extends React.Component {
         secondsRemaining: this.state.secondsRemaining -1
       });
     } else {
+      this.ding.play();
+      clearInterval(this.countdown);
+      document.getElementById("slider").disabled = false;
       this.setState({
         running: false
       });
-      clearInterval(this.countdown);
-      document.getElementById("slider").disabled = false;
     }
   }
 
@@ -87,7 +90,7 @@ export class Timer extends React.Component {
           <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450, border: '1px solid #BBB', borderRadius: '10px 10px 10px 10px' }}>
               <h1 id='counter'>{minutes}:{seconds}</h1>
-              <input id="slider" onChange={this.handleChange} type='range' min="0" max="3600"/>
+              <input id="slider" onChange={this.handleChange} type='range' min="0" max="3600" step="60"/>
               <Button id="button" color={ running ? "red" : "green" } size='massive' type='button' onClick={ running ? this.stopTimer : this.startTimer }> { running ? 'stop' : 'start' }</Button>
             </Grid.Column>
           </Grid>
