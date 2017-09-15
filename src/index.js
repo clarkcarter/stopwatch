@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';
-import { Grid, Segment, Divider, Button } from 'semantic-ui-react';
+import { Segment, Button, Grid } from 'semantic-ui-react';
 
 export class Timer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      secondsRemaining: 610,
+      secondsRemaining: 0,
       running: false
     };
     this.formatedSeconds = this.formatedSeconds.bind(this);
@@ -67,14 +67,15 @@ export class Timer extends React.Component {
     const running = this.state.running;
     return (
       <div>
-        <Grid centered columns={2}>
-          <Segment padded="very">
-            <h1>{minutes}:{seconds}</h1>
-            <Divider horizontal>Choose Duration</Divider>
-            <input id="slider" onChange={this.handleChange} type='range' min="0" max="3600"/><br />
-            <Button primary size='massive' type='button' onClick={this.state.running ? this.stopTimer : this.startTimer}>{running ? 'stop' : 'start'}</Button>
-          </Segment>
-        </Grid>
+        <Segment>
+          <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
+            <Grid.Column style={{ maxWidth: 450, border: '1px solid #BBB', borderRadius: '10px 10px 10px 10px' }}>
+              <h1 id='counter'>{minutes}:{seconds}</h1>
+              <input id="slider" onChange={this.handleChange} type='range' min="0" max="3600"/>
+              <Button id="button" color={ running ? "red" : "green" } size='massive' type='button' onClick={ running ? this.stopTimer : this.startTimer }> { running ? 'stop' : 'start' }</Button>
+            </Grid.Column>
+          </Grid>
+        </Segment>
       </div>
     )
   }
