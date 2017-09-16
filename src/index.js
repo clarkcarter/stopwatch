@@ -88,7 +88,7 @@ export class Timer extends React.Component {
       <div>
         <Segment>
           <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
-            <Grid.Column style={{ maxWidth: 450, border: '1px solid #BBB', borderRadius: '10px 10px 10px 10px' }}>
+            <Grid.Column id='timer'>
               <h1 id='counter'>{minutes}:{seconds}</h1>
               <input id="slider" onChange={this.handleChange} type='range' min="0" max="3600" step="60"/>
               <Button id="button" color={ running ? "red" : "green" } size='massive' type='button' onClick={ running ? this.stopTimer : this.startTimer }> { running ? 'stop' : 'start' }</Button>

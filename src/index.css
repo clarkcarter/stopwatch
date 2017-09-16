@@ -4,6 +4,12 @@ body > div > div > div {
   height: 100%;
 }
 
+#timer {
+  max-width: 450px;
+  border: 1px solid #BBB;
+  border-radius: 10px 10px 10px 10px;
+}
+
 #slider {
   width: 300px;
 }
@@ -16,4 +22,10 @@ body > div > div > div {
 #counter {
   font-size: 5em;
   padding: 20px;
+}
+
+@media (max-width: 480px) {
+  #timer {
+    border: none;
+  }
 }
