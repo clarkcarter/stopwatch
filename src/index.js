@@ -9,7 +9,7 @@ export class Timer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      secondsRemaining: 60,
+      secondsRemaining: 1800,
       running: false
     };
     this.formatedSeconds = this.formatedSeconds.bind(this);
